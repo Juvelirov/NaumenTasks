@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 
 public class Task3 {
     public static void main(String[] args) {
-        ArrayList<Employee> list = new ArrayList<>();
+        ArrayList<Employee> list = new ArrayList<>(5);
         Employee emp1 = new Employee("Иванов Иван Иванович", 20, "Marketing", 60000d);
         Employee emp2 = new Employee("Артемов Артем Артемович", 24, "IT", 90000d);
         Employee emp3 = new Employee("Семенов Семен Семенович", 22, "Sales", 70000d);

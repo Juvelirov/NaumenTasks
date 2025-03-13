@@ -34,7 +34,7 @@ public class Task1 {
     }
 
     /**
-     * Заполняет массив случайными целыми числами в диапазоне от {@code -MAX_RANDOM_VALUE} до {@code MAX_RANDOM_VALUE}.
+     * Заполняет массив случайными целыми числами в диапазоне от {@code -MAX_RANDOM_VALUE} до {@code MAX_RANDOM_VALUE - 1}.
      *
      * @param n количество элементов в массиве
      * @return массив целых чисел размером {@code n}

@@ -16,25 +16,29 @@ public class Task4 {
     public static void main(String[] args) throws IOException, InterruptedException {
         String url = "https://httpbin.org/anything";
 
-        HttpClient client = HttpClient.newHttpClient();
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(url))
-                .header("Accept", "application/json") // Для примера в request пусть будет только json в качестве допустимого.
-                .GET()
-                .build();
+        try(HttpClient client = HttpClient.newHttpClient()) {
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(url))
+                    .header("Accept", "application/json") // Для примера в request пусть будет только json в качестве допустимого.
+                    .GET()
+                    .build();
 
-        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
-        ObjectMapper mapper = new ObjectMapper();
-        JsonNode jsonNode = mapper.readTree(response.body());
+            ObjectMapper mapper = new ObjectMapper();
+            JsonNode jsonNode = mapper.readTree(response.body());
 
-        JsonNode headers = jsonNode.get("headers");
-        JsonNode acceptHeader = headers.get("Accept"); // Сервер наше значение продублирует в качестве допустимых в своём ответе
+            JsonNode headers = jsonNode.get("headers");
+            JsonNode acceptHeader = headers.get("Accept"); // Сервер наше значение продублирует в качестве допустимых в своём ответе
 
-        if (acceptHeader != null) {
-            System.out.println("Accept: " + acceptHeader.asText());
-        } else {
-            System.out.println("Не найдено");
+            if (acceptHeader != null) {
+                System.out.println("Accept: " + acceptHeader.asText());
+            } else {
+                System.out.println("Не найдено");
+            }
+        }
+        catch(IOException e){
+            e.printStackTrace();
         }
     }
 }
